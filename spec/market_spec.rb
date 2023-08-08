@@ -89,7 +89,7 @@ RSpec.describe Market do
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
-      # require 'pry';binding.pry
+      
       expect(market.sorted_item_list).to eq(["Banana Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato' ])
     end
   end
@@ -129,7 +129,7 @@ RSpec.describe Market do
           vendors: [vendor1, vendor2]
         }
       }
-      # require 'pry';binding.pry
+      require 'pry';binding.pry
       expect(market.total_inventory).to eq(expected)
     end
   end
@@ -148,7 +148,7 @@ RSpec.describe Market do
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
-      # require 'pry';binding.pry
+      
       expect(market.overstocked_items).to eq([item1, item3])
     end
   end

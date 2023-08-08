@@ -34,4 +34,8 @@ class Market
 
     market_inventory
   end
+
+  def overstocked_items
+    total_inventory.select {|key, values| key if values[:quantity] > 50 && values[:vendors].count > 1}.keys
+  end
 end
