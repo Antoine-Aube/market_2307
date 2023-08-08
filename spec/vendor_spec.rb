@@ -51,7 +51,7 @@ RSpec.describe Item do
       vendor2.stock(item3, 25)
 
       vendor3.stock(item1, 65)
-
+     
       expect(vendor1.potential_revenue).to eq(29.75)
       expect(vendor2.potential_revenue).to eq(345.00)
       expect(vendor3.potential_revenue).to eq(48.75)
