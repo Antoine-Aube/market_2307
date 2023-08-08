@@ -129,7 +129,7 @@ RSpec.describe Market do
           vendors: [vendor1, vendor2]
         }
       }
-      require 'pry';binding.pry
+      # require 'pry';binding.pry
       expect(market.total_inventory).to eq(expected)
     end
   end
@@ -150,6 +150,14 @@ RSpec.describe Market do
       market.add_vendor(vendor3)
       
       expect(market.overstocked_items).to eq([item1, item3])
+    end
+  end
+
+  describe "date" do 
+    it "returns the date of the market as a String" do 
+      allow(Date).to receive(:today).and_return(Date.new(2003, 7, 19))
+      # require 'pry';binding.pry
+      expect(market.date).to eq("07/19/2003")
     end
   end
 end

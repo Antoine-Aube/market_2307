@@ -1,3 +1,5 @@
+require 'date'
+
 class Market
   attr_reader :name, :vendors
 
@@ -37,5 +39,10 @@ class Market
 
   def overstocked_items
     total_inventory.select {|key, values| key if values[:quantity] > 50 && values[:vendors].count > 1}.keys
+  end
+
+  def date
+    todays_date = Date.today
+    formatted_date = "#{todays_date.mon.to_s.rjust(2, '0')}/#{todays_date.mday.to_s.rjust(2, '0')}/#{todays_date.year}"
   end
 end
