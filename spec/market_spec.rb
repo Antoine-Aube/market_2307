@@ -133,4 +133,23 @@ RSpec.describe Market do
       expect(market.total_inventory).to eq(expected)
     end
   end
+
+  describe "#overstocked_items" do 
+    it "returns an array of items that are sold by more than one vendor and have a total quantity greater than 100" do 
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor1.stock(item4, 20)
+ 
+      vendor2.stock(item3, 25)
+
+      vendor3.stock(item1, 65)
+      vendor3.stock(item3, 30)
+
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+      # require 'pry';binding.pry
+      expect(market.overstocked_items).to eq([item1, item3])
+    end
+  end
 end
