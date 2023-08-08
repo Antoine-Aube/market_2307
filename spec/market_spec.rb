@@ -89,8 +89,48 @@ RSpec.describe Market do
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
-      require 'pry';binding.pry
+      # require 'pry';binding.pry
       expect(market.sorted_item_list).to eq(["Banana Nice Cream", 'Peach', "Peach-Raspberry Nice Cream", 'Tomato' ])
+    end
+  end
+
+  describe "#total_inventory" do 
+    it "returns a hash for all items that has a hash of their quantities and vendors" do 
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor1.stock(item4, 20)
+
+      vendor2.stock(item4, 50)  
+      vendor2.stock(item3, 25)
+      vendor2.stock(item2, 21)
+
+      vendor3.stock(item1, 65)
+      vendor3.stock(item3, 5)
+
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+      
+      expected = {
+        item1 => {
+          quantity: 100,
+          vendors: [vendor1, vendor3]
+        },
+        item2 => {
+          quantity: 28,
+          vendors: [vendor1, vendor2]
+        },
+        item3 => {
+          quantity: 30,
+          vendors: [vendor2, vendor3]
+        },
+        item4 => {
+          quantity: 70,
+          vendors: [vendor1, vendor2]
+        }
+      }
+      # require 'pry';binding.pry
+      expect(market.total_inventory).to eq(expected)
     end
   end
 end

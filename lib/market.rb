@@ -21,4 +21,17 @@ class Market
   def sorted_item_list
     @vendors.flat_map {|vendor| vendor.inventory.keys.map {|item| item.name}}.sort.uniq
   end
+
+  def total_inventory
+    market_inventory = Hash.new { |hash, key| hash[key] = { quantity: 0, vendors: [] } }
+
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item, quantity|
+        market_inventory[item][:quantity] += quantity
+        market_inventory[item][:vendors] << vendor
+      end
+    end
+
+    market_inventory
+  end
 end
